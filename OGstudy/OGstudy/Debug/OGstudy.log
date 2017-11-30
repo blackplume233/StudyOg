@@ -1,3 +1,2 @@
-﻿  WinMain.cpp
-f:\source\repos\richangtraning\ogstudy\ogstudy\winmain.cpp(140): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  OGstudy.vcxproj -> F:\Source\Repos\RiChangTraning\OGstudy\Debug\OGstudy.exe
+﻿  OGstudy.vcxproj -> H:\RiChangTraning\OGstudy\Debug\OGstudy.exe
+  OGstudy.vcxproj -> H:\RiChangTraning\OGstudy\Debug\OGstudy.pdb (Partial PDB)
