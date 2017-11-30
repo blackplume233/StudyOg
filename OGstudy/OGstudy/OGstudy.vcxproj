@@ -119,10 +119,12 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="MyShader.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyShader.h" />
+    <ClInclude Include="src\include\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\Shader.fs" />

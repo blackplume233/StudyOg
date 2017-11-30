@@ -1,14 +1,16 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
-#include"MyShader.h"
-
+#include "MyShader.h"
+#include "glad/stb_image.h"
 
 //float vertices[] = {
 //	-0.5f,-0.5f,1.0f,
 //	0.5f,-1.0f,0.0f,
 //	0.0f,0.5f,0.0f
 //};
+
+
 
 float vertices[] = {
 	// 位置              // 颜色
@@ -46,6 +48,7 @@ MyShader* ptr;
 void framebuffer_callback(GLFWwindow* window, int width, int heigth);
 void processInput(GLFWwindow *window);
 void inline SetRush();
+void inline SetRushBox();
 void inline Rush();
 int inline MainWindows() {
 	glfwInit();
@@ -69,6 +72,8 @@ int inline MainWindows() {
 	
 	glfwSetFramebufferSizeCallback(window, framebuffer_callback);
 	SetRush();
+
+
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
@@ -109,22 +114,6 @@ inline void SetRush()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
-
-/**	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);**/
 	MyShader sd("source/shader.vs", "source/shader.fs");
 	ptr = &sd;
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -133,6 +122,40 @@ inline void SetRush()
 	glEnableVertexAttribArray(1);
 	sd.use();
 	
+}
+
+inline void SetRushBox()
+{
+
+	float verticesBox[] = {
+		//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+	};
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load("source\container.jpg", &width, &height, &nrChannels, 0);
+	unsigned int texture;
+
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	stbi_image_free(data);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+
+
+
+
 }
 
 inline void Rush()
