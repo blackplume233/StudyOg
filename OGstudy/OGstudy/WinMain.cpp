@@ -1,13 +1,20 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
+#include"MyShader.h"
 
 
+//float vertices[] = {
+//	-0.5f,-0.5f,1.0f,
+//	0.5f,-1.0f,0.0f,
+//	0.0f,0.5f,0.0f
+//};
 
 float vertices[] = {
-	-0.5f,-0.5f,1.0f,
-	0.5f,-1.0f,0.0f,
-	0.0f,0.5f,0.0f
+	// 位置              // 颜色
+	0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // 右下
+	-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下
+	0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部
 };
 
 const char *vertexShaderSource = "#version 330 core\n"
@@ -20,11 +27,21 @@ const char *vertexShaderSource = "#version 330 core\n"
 
 const char *fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
-
+"uniform vec4 ourColor;\n"
 "void main()\n"
 "{\n"
-"FragColor = vec4(1.0f,0.5f,0.2f,1.0f);\n"
+"FragColor = ourColor;\n"
 "}\0";
+
+float timeValue;
+float greenValue; 
+int vertexColorLocation; 
+unsigned int VAO;
+unsigned int vertexShader;
+unsigned int VBO;
+unsigned int fragmentShader;
+unsigned int shaderProgram;
+MyShader* ptr;
 
 void framebuffer_callback(GLFWwindow* window, int width, int heigth);
 void processInput(GLFWwindow *window);
@@ -63,6 +80,8 @@ int inline MainWindows() {
 	return 0;
 }
 int main() {
+
+	//std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 	MainWindows();
 	return 0;
 }
@@ -82,11 +101,7 @@ void processInput(GLFWwindow *window) {
 
 inline void SetRush()
 {
-	unsigned int VAO;
-	unsigned int vertexShader;
-	unsigned int VBO;
-	unsigned int fragmentShader;
-	unsigned int shaderProgram;
+
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -95,7 +110,7 @@ inline void SetRush()
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
 
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+/**	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
@@ -109,16 +124,27 @@ inline void SetRush()
 	glLinkProgram(shaderProgram);
 	glUseProgram(shaderProgram);
 	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
+	glDeleteShader(fragmentShader);**/
+	MyShader sd("source/shader.vs", "source/shader.fs");
+	ptr = &sd;
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	sd.use();
 	
 }
 
 inline void Rush()
 {
+	timeValue = glfwGetTime();
+	greenValue = sin(timeValue);
+	ptr->use();
+	vertexColorLocation = glGetUniformLocation(ptr->ID, "alpha");
+	glUniform1f(vertexColorLocation, greenValue);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glEnableVertexAttribArray(0);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
+
+
