@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{2CC3D584-3B74-4B92-B6B4-B160CE543D80}</ProjectGuid>
     <RootNamespace>OGstudy</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,6 +73,9 @@
     <ExecutablePath>C:\Users\A\Documents\MyLinux\gunwork\lib;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(ProjectDir)\src\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)src\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -89,6 +92,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(ProjectDir)src\lib\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -119,12 +125,16 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="MyShader.cpp" />
-    <ClCompile Include="src\stb_image.cpp" />
-    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyShader.h" />
+    <ClInclude Include="src\include\glad\glad.h" />
+    <ClInclude Include="src\include\glad\stb_image.h" />
+    <ClInclude Include="src\include\GLFW\glfw3.h" />
+    <ClInclude Include="src\include\GLFW\glfw3native.h" />
+    <ClInclude Include="src\include\KHR\khrplatform.h" />
     <ClInclude Include="src\include\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +144,11 @@
     <None Include="source\shader\shaderBox.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="source\awesomeface.png" />
     <Image Include="source\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="src\lib\glfw3.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

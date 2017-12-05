@@ -24,10 +24,7 @@
     <ClCompile Include="MyShader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\stb_image.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stb_image.cpp">
+    <ClCompile Include="stb_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +33,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\include\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\glad\glad.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\glad\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\GLFW\glfw3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\GLFW\glfw3native.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\KHR\khrplatform.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -49,5 +61,11 @@
     <Image Include="source\container.jpg">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="source\awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="src\lib\glfw3.lib" />
   </ItemGroup>
 </Project>
