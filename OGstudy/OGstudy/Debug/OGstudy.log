@@ -1,5 +1,1 @@
-﻿F:\visual\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(937,5): warning MSB8027: 名为 stb_image.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 src\stb_image.cpp, src\stb_image.cpp。
-  WinMain.cpp
-h:\richangtraning\ogstudy\ogstudy\winmain.cpp(207): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  OGstudy.vcxproj -> H:\RiChangTraning\OGstudy\Debug\OGstudy.exe
-  OGstudy.vcxproj -> H:\RiChangTraning\OGstudy\Debug\OGstudy.pdb (Partial PDB)
+﻿  OGstudy.vcxproj -> F:\Source\Repos\Richang\OGstudy\Debug\OGstudy.exe
