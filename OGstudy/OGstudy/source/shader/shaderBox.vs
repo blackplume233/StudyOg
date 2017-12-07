@@ -8,9 +8,10 @@ out vec2 TexCoord;
 out vec2 TexCoord2;
 uniform float facex;
 uniform float facexa;
+uniform mat4 transform;
 void main()
 {
-	gl_Position = vec4(aPos, 1.0);
+	gl_Position = vec4(aPos, 1.0)*transform;
 	ourColor = aColor;
 	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 	TexCoord2 = vec2(aTexCoord.x*(facex)+facexa, aTexCoord.y);
