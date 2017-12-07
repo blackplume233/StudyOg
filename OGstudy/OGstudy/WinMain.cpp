@@ -3,7 +3,10 @@
 #include <iostream>
 #include "MyShader.h"
 #include "glad/stb_image.h"
-
+#include "bp.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 //float vertices[] = {
 //	-0.5f,-0.5f,1.0f,
 //	0.5f,-1.0f,0.0f,
@@ -109,7 +112,11 @@ int inline MainWindows() {
 
 		// render container
 
-		ourShader.use();
+		ourShader.use(); 
+		glm::mat4 trans;
+		trans = glm::translate(trans, glm::vec3(0.5f, 0.0f, 0.0f));
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(glGetUniformLocation(ourShader.ID,"transform"), 1, GL_FALSE, glm::value_ptr(trans));
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -122,6 +129,7 @@ int inline MainWindows() {
 int main() {
 
 	//std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+	bp::runtest();
 	MainWindows();
 	return 0;
 }
@@ -205,7 +213,6 @@ inline void SetRushBox()
 		glUniform1i(glGetUniformLocation(shaderPtr->ID, "texture1"), 0); // ÊÖ¶¯ÉèÖÃ
 		glUniform1i(glGetUniformLocation(shaderPtr->ID, "texture2"), 1);
 	}
-
 	// load and create a texture 
 	// -------------------------
 	

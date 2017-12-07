@@ -123,12 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bp.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bp.h" />
     <ClInclude Include="MyShader.h" />
     <ClInclude Include="src\include\glad\glad.h" />
     <ClInclude Include="src\include\glad\stb_image.h" />

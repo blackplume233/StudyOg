@@ -1,1 +1,4 @@
-﻿  OGstudy.vcxproj -> F:\Source\Repos\Richang\OGstudy\Debug\OGstudy.exe
+﻿  WinMain.cpp
+f:\source\repos\richang\ogstudy\ogstudy\winmain.cpp(106): warning C4305: “+=”: 从“double”到“float”截断
+f:\source\repos\richang\ogstudy\ogstudy\winmain.cpp(223): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  OGstudy.vcxproj -> F:\Source\Repos\Richang\OGstudy\Debug\OGstudy.exe
